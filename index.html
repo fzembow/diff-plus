@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+    <title>
+        diff
+    </title>
+    <style>
+        body,html{
+            height:100%;
+            width:100%;
+            margin:0px;
+            padding:0px;
+            font-family:Arial, sans-serif;
+            font-size:0.9em;
+        }
+        
+        body{
+            margin-top:10px;
+        }
+        
+        div{
+            background-color:inherit;
+        }
+        
+        div.diff{
+            margin-left:20px;
+            
+            overflow:auto;
+            padding-top:2px;
+            padding-bottom:5px;
+            background-color:transparent;
+        }
+        
+        div.diff:hover{
+            background-color:#ccc;
+        }
+        
+        div.diff-position{
+            position:relative;
+            top:-3px;
+            font-weight:bold;
+        }
+        
+        div.diff-content{
+            border-top:1px solid #ccc;
+            margin-left:20px;
+        }
+        
+        div.diff-old{
+            float:left;
+            width:40%;
+            color:red;
+        }
+        
+        div.diff-new{
+            float:left;
+            width:40%;
+            color:green;
+        }
+        
+        div.empty{
+            visibility:hidden;
+        }
+        
+    </style>
+    <script type="text/javascript">
+    function onClose()
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+          xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        
+        xmlhttp.open("POST","post",false);
+        xmlhttp.send();        
+        
+      return "Any string value here forces a dialog box to \n" + 
+      	     "appear before closing the window.";
+    }
+    window.onbeforeunload = onClose;
+    
+          /* 
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+          xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }*/
+    
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="diffs">
+            <!--(for diff in diffs)-->
+            <div class='diff'>
+                
+                    <div class="diff-position">
+                        @!diff['position']!@
+                    </div>
+                
+                    <div class="diff-content">
+                        <div class="diff-old">
+                        <!--(for old in diff['old'])-->
+                            <div class='diff_detail'>
+                                @!old!@
+                            </div>
+                        <!--(else)-->
+                            <div class='diff_detail empty'>__</div>
+                        <!--(end)-->
+                        </div>
+                    
+                        <div class="diff-new">
+                        <!--(for new in diff['new'])-->
+                            <div class='diff_detail'>
+                                @!new!@
+                            </div>
+                        <!--(end)-->
+                        </div>
+                    </div>
+            </div>
+            <!--(else)-->
+            <div>No difference in files!</div>
+            <!--(end)-->
+        </div>
+    </div>
+</body>
+</html>
