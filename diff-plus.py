@@ -9,6 +9,8 @@ DELAY = 0.5
 DEFAULT_PORT = 14141
 PROTOCOL = "HTTP/1.0"
 
+SCRIPT_DIR = os.path.realpath(os.path.dirname(sys.argv[0]))
+
 CHANGE_RE = "^\d+(?:,\d+)?[acd]\d+(?:,\d+)?$"
 
 ipq = Queue.Queue()
@@ -58,7 +60,7 @@ class DiffPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         
         params = {"diffs": self.data}
         
-        t = pyratemp.Template(filename="index.html")
+        t = pyratemp.Template(filename=SCRIPT_DIR + "/index.html")
         result = t(**pyratemp.dictkeyclean(params))
         
         self.wfile.write(result)
